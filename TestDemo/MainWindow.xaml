@@ -12,8 +12,8 @@
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
                         <StackPanel>
-                            <TextBlock Text="{Binding Path=Value}" />
-                            <TextBlock Text="{Binding Path=Key.Name}" />
+                            <TextBlock Text="{Binding Path=Value, Mode=OneTime}" />
+                            <TextBlock Text="{Binding Path=Key.Name, Mode=OneTime}" />
                         </StackPanel>
                     </Border>
                 </DataTemplate>
