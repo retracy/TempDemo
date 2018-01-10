@@ -1,28 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TestDemo
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+
+            Books = new Dictionary<Book, int>();
+            Books.Add(new Book() { Name = "Book 1" }, 1);
+            Books.Add(new Book() { Name = "Book 2" }, 2);
+            Books.Add(new Book() { Name = "Book 3" }, 3);
+
+            SelectedBookIndex = 2;
+
+            DataContext = this;
         }
+
+        public Dictionary<Book, int> Books { get; set; }
+
+        private int _selectedBookIndex;
+        public int SelectedBookIndex
+        {
+            get { return _selectedBookIndex; }
+            set
+            {
+                _selectedBookIndex = value;
+                Debug.WriteLine("Selected Book Index=" + _selectedBookIndex);
+            }
+        }
+    }
+
+    public class Book
+    {
+        public string Name { get; set; }
     }
 }
