@@ -12,17 +12,17 @@ namespace TestDemo
         {
             InitializeComponent();
 
-            Books = new Dictionary<Book, int>();
-            Books.Add(new Book() { Name = "Book 1" }, 1);
-            Books.Add(new Book() { Name = "Book 2" }, 2);
-            Books.Add(new Book() { Name = "Book 3" }, 3);
+            Books = new ObservableDictionary<int, Book>();
+            Books.Add(1, new Book() { Name = "Book 1" });
+            Books.Add(2, new Book() { Name = "Book 2" });
+            Books.Add(3, new Book() { Name = "Book 3" });
 
             SelectedBookIndex = 2;
 
             DataContext = this;
         }
 
-        public Dictionary<Book, int> Books { get; set; }
+        public ObservableDictionary<int, Book> Books { get; set; }
 
         private int _selectedBookIndex;
         public int SelectedBookIndex
@@ -34,10 +34,23 @@ namespace TestDemo
                 Debug.WriteLine("Selected Book Index=" + _selectedBookIndex);
             }
         }
+
+        private void buttonChangeSomething_Click(object sender, RoutedEventArgs e)
+        {
+            //Books.Remove(1);
+            //Books.Add(1, new Book() { Name = "Hello Betty" });
+
+            for (int i = 0; i < Books.Count; i++)
+                Books[i + 1] = new Book() { Name = Books[i + 1].Name + "!" };
+        }
     }
 
     public class Book
     {
         public string Name { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
